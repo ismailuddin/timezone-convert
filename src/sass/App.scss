@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fugaz+One&display=swap');
+@import 'modules/time-zone-slider';
+
+body {
+    margin: 0;
+    padding: 25px;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    background-color: #cfd8dc;
+    font-size: 1.6rem;
+    color: #263238;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    width: 1024px;
+    margin: auto;
+    padding: 0;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Staatliches';
+    letter-spacing: 0.2rem;
+    font-weight: 500;
+}
+
+label {
+    display: block;
+    padding-left: 5px;
+    font-weight: 500;
+}
+
+
+input[type="text"] {
+    font-family: 'IBM Plex Sans';
+    margin: 5px 0px;
+    border: none;
+    background-color: white;
+    padding: 10px 10px;
+    width: 100%;
+    display: inline-block;
+    font-size: 1em;
+    outline: none;
+    box-shadow: 3px 3px 6px rgba(black, 0.2);
+}
+
+
+.autocomplete {
+    position: relative;
+    margin-right: 15px;
+    margin-bottom: 10px;
+
+    ul.autocomplete-suggestions {
+        list-style: none;
+        width: 100%;
+        padding: 0px;
+        margin: 0;
+        z-index: 99;
+        border-radius: 5px;
+        max-height: 200px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        position: absolute;
+        background-color: rgba(234, 239, 242, 1);
+        box-shadow: 0px 6px 16px rgba(black, 0.2);
+
+    
+        li {
+            padding: 8px 10px;
+            border-bottom: 1px solid rgba(black, 0.1);
+            transition: background 0.3s ease-in;
+
+            &:hover, &:focus, &:active {
+                background-color: rgba(white, 0.6);
+            }
+        }
+    }
+
+}
