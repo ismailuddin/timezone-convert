@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import moment from 'moment-timezone';
+import PropTypes from 'prop-types';
 
 export default class TimeZoneSlider extends Component {
+    static propTypes = {
+        selectedTime: PropTypes.instanceOf(moment),
+        setSelectedTime: PropTypes.func
+    }
 
     state = {
         controlledPosition: {
@@ -12,14 +17,10 @@ export default class TimeZoneSlider extends Component {
         base: {
             name: moment.tz.guess(),
         },
-        deltaPosition: {
-            x: 0,
-            y: 0
-        },
         cities: [],
         offsetMinutes: -1 * moment().minutes(),
         time: moment(),
-        currentTime: moment()
+        // currentTime: moment()
     }
 
     componentDidMount() {
@@ -30,21 +31,7 @@ export default class TimeZoneSlider extends Component {
                 x: x + offset,
                 y
             },
-            deltaPosition: {
-                x: x + offset,
-                y
-            }
         })
-    }
-
-    
-
-    componentDidUpdate(prevProps, prevState) {
-        if (prevProps.cities !== this.props.cities) {
-            this.setState({
-                cities: this.props.cities
-            })
-        }
     }
 
     calculateOffsetInPx(minutes) {
@@ -60,7 +47,7 @@ export default class TimeZoneSlider extends Component {
     }
 
     onControlledDrag = (e, ui) => {
-        const x = this.state.deltaPosition.x;
+        const { x }  = this.state.controlledPosition;
         const newX = x + ui.deltaX;
         let currentTime = moment(moment().hours(), "HH");
         let newTime;
@@ -77,11 +64,6 @@ export default class TimeZoneSlider extends Component {
                 x: newX,
                 y: 0
             },
-            deltaPosition: {
-                x: newX,
-                y: 0,
-            },
-            currentTime: newTime
         }, () => {
             this.props.setSelectedTime(newTime);
         });
@@ -90,16 +72,12 @@ export default class TimeZoneSlider extends Component {
 
     resetTime = () => {
         let newTime = moment();
+        let offset = this.calculateOffsetInPx(moment().minutes())
         this.setState({
             controlledPosition: {
-                x: 0,
+                x: 0 - offset,
                 y: 0
             },
-            deltaPosition: {
-                x: 0,
-                y: 0,
-            },
-            currentTime: newTime
         }, () => {
             this.props.setSelectedTime(newTime);
         });
@@ -118,7 +96,7 @@ export default class TimeZoneSlider extends Component {
                     Set to current time
                 </button>
                 <div className="selected-time">
-                    {this.state.currentTime.format("hh:mm A")}
+                    {this.props.selectedTime.format("hh:mm A")}
                 </div>
                 <div className="time-slider-container">
                     <div className="selected-time-indicator"></div>

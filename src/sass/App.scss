@@ -1,9 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Fugaz+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Six+Caps|Teko:300&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
-@import 'modules/time-zone-slider';
 
 $dark_blue: #094067;
 $light_blue: #3da9fc;
@@ -15,192 +9,268 @@ $red: #ef4565;
 
 $background: $nearly_white;
 
-* {
-    padding: 0;
-    margin: 0;
-}
-
-html {
-    padding: 0;
-    margin: 0;
-}
-
-
-body {
-    margin: 0;
-    padding: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    background-color: $background;
-    font-size: 1.6rem;
-    color: $dark_gray;
-}
+@import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Fugaz+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Six+Caps|Teko:300&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
+@import 'modules/time-zone-slider';
 
 * {
     box-sizing: border-box;
 }
 
-.container {
-    width: 1024px;
-    margin: auto;
-    padding: 0;
+html {
+	padding: 0;
+	margin: 0;
 }
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+		"Droid Sans", "Helvetica Neue", sans-serif;
+	background-color: $background;
+    color: $dark_gray;
+    
+    @media(min-width: 480px) {
+        font-size: 1.6rem;
+    }
+}
+
+
+.container {
+    width: 95%;
+    margin: auto;
+    @media(min-width: 1280px) {
+        max-width: 1024px;
+        margin: auto;
+    }
+	padding: 0px 20px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.column {
+	flex-basis: 100%;
+}
+
+@media screen and (min-width: 800px) {
+	.column {
+		flex: 1;
+	}
+}
+
+@media screen and (min-width: 800px) {
+    ._25 {
+      flex: 2.5;
+    }
+    ._55 {
+      flex: 5.5;
+    }
+    ._20 {
+      flex: 2;
+    }
+  }
 
 .navbar {
-    // background-color: $faint_blue;
+    @media(min-width: 800px){
+    }
     padding: 25px 0px;
-    margin-bottom: 25px;
+	margin-bottom: 25px;
 
-    h1, h3 {
+	h1,
+	h3 {
         margin-bottom: 0;
+        margin-top: 0;
     }
     
-    & > .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        & > .items {
-            display: flex;
-            align-items: center;
-            & > * {
-                margin-left: 20px;
-            }
-        }
+    img.logo {
+        height: 55px;
+        width: auto;
     }
 
+	& > .container {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		& > .links {
+            @media(min-width: 800px){
+                display: flex;
+            }
+            display: none;
+			align-items: center;
+			& > * {
+				margin-left: 20px;
+			}
+		}
+	}
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto';
-    letter-spacing: 0.05px;
-    font-weight: 900;
-    color: $dark_blue;
-    margin-bottom: 25px;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: 'Roboto';
+	letter-spacing: 0.05px;
+	font-weight: 900;
+	color: $dark_blue;
+	margin-bottom: 25px;
 }
 
-p, p.body {
-    margin-bottom: 25px;
+p,
+p.body {
+	margin-bottom: 25px;
 }
-
 
 section.light-bg {
-    background-color: $faint_blue;
-    padding: 25px 0px;
+	background-color: $faint_blue;
+	padding: 25px 0px;
     margin: 25px 0px;
+    min-height: 200px;
+    transition: all 0.3s ease;
 }
 
 label {
-    display: block;
-    font-weight: 500;
-    color: $dark_blue;
+	display: block;
+	font-weight: 500;
+	color: $dark_blue;
 }
 
-
 input[type="text"] {
-    font-family: 'IBM Plex Sans';
-    margin: 5px 0px;
-    border: none;
-    background-color: white;
-    padding: 10px 10px;
-    width: 100%;
-    display: inline-block;
-    font-size: 1em;
-    outline: none;
-    border-radius: 3px;
-    border: 2px solid $light_gray;
+	font-family: 'IBM Plex Sans';
+	margin: 5px 0px;
+	border: none;
+	background-color: white;
+	padding: 10px 10px;
+	width: 100%;
+	display: inline-block;
+	font-size: 1em;
+	outline: none;
+	border-radius: 3px;
+	border: 2px solid $light_gray;
 }
 
 .btn {
-    border-radius: 3px;
-    outline: none;
-    appearance: none;
-    border: none;
-    color: white;
-    font-weight: 500;
-    background-color: $dark_blue;
-    padding: 10px 20px;
-    font-size: 0.8em;
+	border-radius: 3px;
+	outline: none;
+	appearance: none;
+	border: none;
+	color: white;
+	font-weight: 500;
+	background-color: $dark_blue;
+	padding: 10px 20px;
+	font-size: 0.8em;
 
-    &-red {
-        background-color: $red;
-        transition: all 0.3s ease;
+	&-red {
+		background-color: $red;
+		transition: all 0.3s ease;
 
-        &:hover, &:focus, &:active {
-            background-color: lighten($red, 5%);
-        }
-    }
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: lighten($red, 5%);
+		}
+	}
 }
 
 .selected-time {
-    font-family: 'Teko';
-    text-align: center;
-    font-size: 1.6em;
-    color: $dark_blue;
+	font-family: 'Teko';
+	text-align: center;
+	font-size: 1.6em;
+	color: $dark_blue;
 }
 
-
 .cities {
-    display: flex;
-    flex-wrap: wrap;
+	display: flex;
+	flex-wrap: wrap;
 
-    .city {
-        min-width: 250px;
-        margin: 10px;
-        padding: 15px;
-        background-color: #fff;
-        border-radius: 3px;
+	.city {
+		min-width: 250px;
+		margin: 10px;
+		padding: 15px;
+		background-color: #fff;
+		border-radius: 3px;
         transition: box-shadow 0.3s ease;
+        position: relative;
 
-        &:hover, &:focus {
-            box-shadow: 0px 10px 7px -5px rgba($light_blue, 0.2);
+		&:hover,
+		&:active {
+			box-shadow: 0px 10px 7px -5px rgba($light_blue, 0.2);
+        }
+        
+        .close-button {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            border-radius: 100px;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background-color: $red;
+            color: $nearly_white;
+            fill: $nearly_white;
         }
 
-        h4 {
+		h4 {
             color: $dark_blue;
-            
-        }
+            margin-top: 0;
+            margin-bottom: 10px;
+		}
 
-        .city-date {
-            font-weight: 500;
+		.city-date {
+			font-weight: 500;
             font-size: 0.6em;
-        }
-        .city-time {
+            margin-top: 0;
+		}
+		.city-time {
             font-weight: 700;
-            font-size: 1.6em;
-            color: $red;
-        }
-    }
+			font-size: 1.6em;
+			color: $red;
+            margin-top: 0;
+            letter-spacing: 0.01px;
+		}
+	}
 }
 
 .autocomplete {
-    position: relative;
-    margin-bottom: 20px;
+	position: relative;
+	margin-bottom: 20px;
 
-    ul.autocomplete-suggestions {
-        list-style: none;
-        width: 100%;
-        padding: 0px;
-        margin: 0;
-        z-index: 99;
-        border-radius: 5px;
-        max-height: 200px;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        position: absolute;
-        background-color: $dark_blue;
-        box-shadow: 0px 0px 16px rgba($dark_blue, 0.2);
+	ul.autocomplete-suggestions {
+		list-style: none;
+		width: 100%;
+		padding: 0px;
+		margin: 0;
+		z-index: 99;
+		border-radius: 5px;
+		max-height: 200px;
+		overflow-x: hidden;
+		overflow-y: scroll;
+		position: absolute;
+		background-color: $dark_blue;
+		box-shadow: 0px 0px 16px rgba($dark_blue, 0.2);
 
-    
-        li {
-            padding: 8px 10px;
-            border-bottom: 1px solid rgba(white, 0.2);
-            transition: background 0.3s ease-in;
-            color: white;
+		li {
+			padding: 8px 10px;
+			border-bottom: 1px solid rgba(white, 0.2);
+			transition: background 0.3s ease-in;
+			color: white;
 
-            &:hover, &:focus, &:active {
-                background-color: $red;
-                color: white;
-            }
-        }
-    }
-
+			&:hover,
+			&:focus,
+			&:active {
+				background-color: $red;
+				color: white;
+			}
+		}
+	}
 }

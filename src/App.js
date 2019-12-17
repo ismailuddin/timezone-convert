@@ -1,21 +1,27 @@
 import React, { Component } from 'react'
 import './sass/App.scss';
+import Cities from './components/Cities';
 import TimeZoneSlider from './components/TimeZoneSlider';
 import AutocompleteTextbox from './components/AutocompleteTextbox';
 import moment from 'moment';
 
 
 export default class App extends Component {
-
 	state = {
 		cities: [],
-		selectedTime: moment()
+		selectedTime: moment(),
 	}
 
 	addCity = (city) => {
 		this.setState({
 			cities: [...this.state.cities, city]
-		})
+		});
+	}
+
+	removeCity = (city) => {
+		this.setState({
+			cities: [...this.state.cities].filter(c => c !== city)
+		});
 	}
 
 	setSelectedTime = (time) => {
@@ -24,31 +30,24 @@ export default class App extends Component {
 		})
 	}
 
-	convertTimeZone(timeZone) {
-		const timeObject = this.state.selectedTime.clone();
-		return timeObject.tz(timeZone);
-	}
-
 	render() {
 		return (
 			<div>
 				<div className="navbar">
 					<div className="container">
 						<h1>
-							<span aria-label="clock" role="img">⏰ </span> TimeZone <span aria-label="map" role="img">🗺</span>
+							TimeZone
 						</h1>
-						<div className="items">
-							<h3>About</h3>
-							<h3>About</h3>
-						</div>
-
+						<img alt="logo" class="logo" src="./logo.png"/>
 					</div>
 				</div>
 				<section>
 					<div className="container">
-
 						<p className="body">
-							Search for cities in the search bar to below to add them to the list, and then drag the time bar to see the time in different time zones.
+							Easily convert between time zones using a modern and pleasant UI, that works well both on desktop and mobile!
+						</p>
+						<p className="body">
+							Developed as a progressive web app so you can add this to your home screen on your mobile device, and use it like a native app.
 						</p>
 					</div>
 				</section>
@@ -58,27 +57,18 @@ export default class App extends Component {
 							Add cities
 						</h2>
 						<p className="body">
+							Search for cities in the search bar to below to add them to the list, and then drag the time bar to see the time in different time zones.
 						</p>
 						<AutocompleteTextbox
 							label="Time zones"
 							updateParent={this.addCity}
 							entries={moment.tz.names()}
 						/>
-						<div className="cities">
-							{this.state.cities.map(city => (
-								<div className="city">
-									<h4>
-										{city}
-									</h4>
-									<div className="city-date">
-										{this.convertTimeZone(city).format("ddd Do MMM YYYY")}
-									</div>
-									<div className="city-time">
-										{this.convertTimeZone(city).format("hh:mm A")}
-									</div>
-								</div>
-							))}
-						</div>
+						<Cities
+							cities={this.state.cities}
+							removeCity={this.removeCity}
+							selectedTime={this.state.selectedTime}
+						/>
 					</div>
 				</section>
 				<section>
@@ -88,7 +78,7 @@ export default class App extends Component {
 						</h2>
 						
 						<TimeZoneSlider
-							cities={this.state.cities}
+							selectedTime={this.state.selectedTime}
 							setSelectedTime={this.setSelectedTime}
 						/>
 					</div>

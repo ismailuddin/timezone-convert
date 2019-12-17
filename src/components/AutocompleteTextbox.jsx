@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class AutocompleteTextbox extends Component {
+	static propTypes = {
+		entries: PropTypes.array,
+		updateParent: PropTypes.func,
+		label: PropTypes.string
+	}
+	
 	state = {
 		suggestions: [],
-		text: ''
+		text: ""
 	};
 
 	onTextChange = (e) => {
