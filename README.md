@@ -3,6 +3,9 @@
 
 >   A modern progressive web app for converting between time zones, that works well on mobile and desktops
 
+
+![Preview](./preview.png)
+
 Source code for the **TimeZone** website, developed using ReactJS and deployed using Netlify.
 
 ## Resources
