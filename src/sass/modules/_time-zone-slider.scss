@@ -1,33 +1,99 @@
-.time-zone-slider-container {
-    width: 1024px;
-    height: 400px;
-    padding: 25px;
-    position: relative;
-    
 
-    .city-block-base {
-        width: 200px;
-        margin: 10px;
-        padding: 10px;
-        position: absolute;
-        right: 387px;
-        color: white;
-        font-family: 'Fugaz One';
-        user-select: none;
-        background-color: #0039cb;
-        font-size: 0.8em;
-        box-shadow: 3px 3px 6px rgba(#0039cb, 0.6);
-    }
-    
-    .city-block {
-        display: inline-block;
-        border-radius: 10px;
-        padding: 15px;
-        color: white;
-        font-family: 'Fugaz One';
-        user-select: none;
-        font-size: 0.8em;
-        background-color: #0039cb;
-        margin: 8px;
-    }
+.time-slider-container {
+    margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 50px;
+	$base-width: 960px;
+	width: $base-width;
+	height: 80px;
+	position: relative;
+	overflow: hidden;
+	background-color: #fff;
+
+	.selected-time-indicator {
+		&::after {
+            position: absolute;
+            display: block;
+            content: '';
+            left: calc(50% - 20px);
+			width: 0;
+			height: 0;
+			border-left: 20px solid transparent;
+			border-right: 20px solid transparent;
+			border-top: 8px solid#ef4565;
+		}
+	}
+
+	.time-slider {
+		position: absolute;
+        left: 50%;
+        top: 0;
+
+		.handle {
+			position: absolute;
+			$width: $base-width * 4;
+			width: $width;
+			text-align: center;
+			margin: 10px 0px;
+			padding: 0px;
+			left: -1 * $width / 2;
+			color: white;
+			font-family: 'Fugaz One';
+			user-select: none;
+			font-size: 0.8em;
+
+			.hour {
+				display: block;
+				float: left;
+				width: 80px;
+				height: 60px;
+				box-sizing: border-box;
+				content: '';
+				position: relative;
+
+
+				& > .major-bar {
+					width: 2px;
+					height: 50%;
+					background-color: #90b4ce;
+					float: left;
+					left: 0;
+					content: '';
+				}
+
+				& > .minor-bar {
+					float: left;
+					margin-left: 7px;
+					width: 1px;
+					height: 25%;
+					background-color: #90b4ce;
+					content: '';
+				}
+
+				& > .time {
+					position: absolute;
+                    width: 80px;
+                    text-align: center;
+                    top: 50%;
+                    left: -50%;
+					font-family: 'Teko';
+					font-weight: 300;
+					font-size: 1.2em;
+					color: #094067;
+				}
+			}
+		}
+	}
+
+	.city-block {
+		display: inline-block;
+		border-radius: 10px;
+		padding: 15px;
+		color: white;
+		font-family: 'Fugaz One';
+		user-select: none;
+		font-size: 0.8em;
+		background-color: #0039cb;
+		margin: 8px;
+	}
 }

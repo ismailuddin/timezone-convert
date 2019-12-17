@@ -1,14 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Fugaz+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Six+Caps|Teko:300&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Dosis:200,300,400|Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
 @import 'modules/time-zone-slider';
+
+$dark_blue: #094067;
+$light_blue: #3da9fc;
+$faint_blue: #d8eefe;
+$dark_gray: #5f6c7b;
+$light_gray: #90b4ce;
+$nearly_white: #fffffe;
+$red: #ef4565;
+
+$background: $nearly_white;
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
 
 body {
     margin: 0;
-    padding: 25px;
+    padding: 0;
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-    background-color: #cfd8dc;
+    background-color: $background;
     font-size: 1.6rem;
-    color: #263238;
+    color: $dark_gray;
 }
 
 * {
@@ -21,17 +45,53 @@ body {
     padding: 0;
 }
 
+.navbar {
+    // background-color: $faint_blue;
+    padding: 25px 0px;
+    margin-bottom: 25px;
+
+    h1, h3 {
+        margin-bottom: 0;
+    }
+    
+    & > .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        & > .items {
+            display: flex;
+            align-items: center;
+            & > * {
+                margin-left: 20px;
+            }
+        }
+    }
+
+}
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Staatliches';
-    letter-spacing: 0.2rem;
-    font-weight: 500;
+    font-family: 'Roboto';
+    letter-spacing: 0.05px;
+    font-weight: 900;
+    color: $dark_blue;
+    margin-bottom: 25px;
+}
+
+p, p.body {
+    margin-bottom: 25px;
+}
+
+
+section.light-bg {
+    background-color: $faint_blue;
+    padding: 25px 0px;
+    margin: 25px 0px;
 }
 
 label {
     display: block;
-    padding-left: 5px;
     font-weight: 500;
+    color: $dark_blue;
 }
 
 
@@ -45,14 +105,75 @@ input[type="text"] {
     display: inline-block;
     font-size: 1em;
     outline: none;
-    box-shadow: 3px 3px 6px rgba(black, 0.2);
+    border-radius: 3px;
+    border: 2px solid $light_gray;
+}
+
+.btn {
+    border-radius: 3px;
+    outline: none;
+    appearance: none;
+    border: none;
+    color: white;
+    font-weight: 500;
+    background-color: $dark_blue;
+    padding: 10px 20px;
+    font-size: 0.8em;
+
+    &-red {
+        background-color: $red;
+        transition: all 0.3s ease;
+
+        &:hover, &:focus, &:active {
+            background-color: lighten($red, 5%);
+        }
+    }
+}
+
+.selected-time {
+    font-family: 'Teko';
+    text-align: center;
+    font-size: 1.6em;
+    color: $dark_blue;
 }
 
 
+.cities {
+    display: flex;
+    flex-wrap: wrap;
+
+    .city {
+        min-width: 250px;
+        margin: 10px;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 3px;
+        transition: box-shadow 0.3s ease;
+
+        &:hover, &:focus {
+            box-shadow: 0px 10px 7px -5px rgba($light_blue, 0.2);
+        }
+
+        h4 {
+            color: $dark_blue;
+            
+        }
+
+        .city-date {
+            font-weight: 500;
+            font-size: 0.6em;
+        }
+        .city-time {
+            font-weight: 700;
+            font-size: 1.6em;
+            color: $red;
+        }
+    }
+}
+
 .autocomplete {
     position: relative;
-    margin-right: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 
     ul.autocomplete-suggestions {
         list-style: none;
@@ -65,17 +186,19 @@ input[type="text"] {
         overflow-x: hidden;
         overflow-y: scroll;
         position: absolute;
-        background-color: rgba(234, 239, 242, 1);
-        box-shadow: 0px 6px 16px rgba(black, 0.2);
+        background-color: $dark_blue;
+        box-shadow: 0px 0px 16px rgba($dark_blue, 0.2);
 
     
         li {
             padding: 8px 10px;
-            border-bottom: 1px solid rgba(black, 0.1);
+            border-bottom: 1px solid rgba(white, 0.2);
             transition: background 0.3s ease-in;
+            color: white;
 
             &:hover, &:focus, &:active {
-                background-color: rgba(white, 0.6);
+                background-color: $red;
+                color: white;
             }
         }
     }

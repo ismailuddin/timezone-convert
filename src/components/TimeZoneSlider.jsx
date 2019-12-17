@@ -1,20 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Draggable from 'react-draggable';
 import moment from 'moment-timezone';
 
 export default class TimeZoneSlider extends Component {
-    static propTypes = {
-        prop: PropTypes
-    }
-
-    constructor(props) {
-        super(props);
-        this.containerPadding = 25;
-        this.containerWidth = 1024 - (2 * this.containerPadding);
-        this.boxPadding = 10;
-        this.boxWidth = 200 + (2 * this.boxPadding);
-    }
 
     state = {
         controlledPosition: {
@@ -24,8 +12,32 @@ export default class TimeZoneSlider extends Component {
         base: {
             name: moment.tz.guess(),
         },
-        cities: []
+        deltaPosition: {
+            x: 0,
+            y: 0
+        },
+        cities: [],
+        offsetMinutes: -1 * moment().minutes(),
+        time: moment(),
+        currentTime: moment()
     }
+
+    componentDidMount() {
+        const { x, y } = this.state.controlledPosition;
+        let offset = this.calculateOffsetInPx(this.state.offsetMinutes);
+        this.setState({
+            controlledPosition: {
+                x: x + offset,
+                y
+            },
+            deltaPosition: {
+                x: x + offset,
+                y
+            }
+        })
+    }
+
+    
 
     componentDidUpdate(prevProps, prevState) {
         if (prevProps.cities !== this.props.cities) {
@@ -35,55 +47,132 @@ export default class TimeZoneSlider extends Component {
         }
     }
 
+    calculateOffsetInPx(minutes) {
+        let a = minutes / (24 * 60);
+        let pixels = a * (24 * 80);
+        return pixels;
+    }
 
-    onControlledDrag = (e, position) => {
-        let { x, y } = position;
-        if (x < 0) {
-            // x = x - this.boxWidth;
+    calculateOffsetInMinutes(pixels) {
+        let a = pixels / (24 * 80);
+        let minutes = a * (24 * 60);
+        return minutes;
+    }
+
+    onControlledDrag = (e, ui) => {
+        const x = this.state.deltaPosition.x;
+        const newX = x + ui.deltaX;
+        let currentTime = moment(moment().hours(), "HH");
+        let newTime;
+        let minutes = Math.abs(this.calculateOffsetInMinutes(newX));
+        if (newX < 0) {
+            newTime = currentTime.add(minutes, 'minutes');
+        } else if (newX > 0) {
+            newTime = currentTime.subtract(minutes, 'minutes')
+        } else if (newX === 0) {
+            newTime = this.state.time;
         }
-        let tOffset = (x / (this.containerWidth / 2)) * (60 * 60 * 18);
         this.setState({
-            controlledPosition:{ 
-                x, 
-                y 
+            controlledPosition: {
+                x: newX,
+                y: 0
             },
-            timeOffsetSeconds: tOffset
+            deltaPosition: {
+                x: newX,
+                y: 0,
+            },
+            currentTime: newTime
+        }, () => {
+            this.props.setSelectedTime(newTime);
         });
     };
 
 
+    resetTime = () => {
+        let newTime = moment();
+        this.setState({
+            controlledPosition: {
+                x: 0,
+                y: 0
+            },
+            deltaPosition: {
+                x: 0,
+                y: 0,
+            },
+            currentTime: newTime
+        }, () => {
+            this.props.setSelectedTime(newTime);
+        });
+    }
+
 
     render() {
+        const hours = [];
+        for (let i = 24; i > 0; i--) {
+            const now = moment();
+            hours.push(now.subtract(i, "hours").format("h A"));
+        }
         return (
-            <div className="time-zone-slider-container">
-                {this.state.cities.map(city => (
-                    <div className="city-block">
-                        {city} <br/>
-                        {this.state.timeOffsetSeconds > 0 ?
-                            moment().add(this.state.timeOffsetSeconds, 'seconds').tz(city).format("HH:mm")
-                            :
-                            moment().subtract(Math.abs(this.state.timeOffsetSeconds), 'seconds').tz(city).format("HH:mm")
+            <div>
+                <button className="btn btn-red" onClick={this.resetTime}>
+                    Set to current time
+                </button>
+                <div className="selected-time">
+                    {this.state.currentTime.format("hh:mm A")}
+                </div>
+                <div className="time-slider-container">
+                    <div className="selected-time-indicator"></div>
+                    <Draggable
+                        bounds={{
+                            left: -1440,
+                            right: 1440
+                        }}
+                        axis="x"
+                        onDrag={this.onControlledDrag}
+                        handle=".handle"
+                        position={this.state.controlledPosition}
+                    >
+                        <div className="time-slider">
+                            <div className="handle">
+                                {hours.map(h => (
+                                    <div className="hour" key={h}>
+                                        <div className="major-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="time">
+                                            {h}
+                                        </div>
+                                    </div>
+                                ))}
+                                {hours.map(h => (
+                                    <div className="hour blue" key={h}>
+                                        <div className="major-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="minor-bar"></div>
+                                        <div className="time">
+                                            {h}
+                                        </div>
+                                    </div>
+                                ))}
 
-                        }
-                    </div>
-                ))}
-                <Draggable
-                    bounds="parent"
-                    axis="x"
-                    onDrag={this.onControlledDrag}
-
-                >
-                    <div className="city-block-base">
-                        {this.state.base.name}
-                        <br/>
-                        {this.state.timeOffsetSeconds > 0 ?
-                            moment().add(this.state.timeOffsetSeconds, 'seconds').format("HH:mm")
-                            :
-                            moment().subtract(Math.abs(this.state.timeOffsetSeconds), 'seconds').format("HH:mm")
-
-                        }
-                    </div>
-                </Draggable>
+                            </div>
+                        </div>
+                    </Draggable>
+                </div>
 
             </div>
         )
