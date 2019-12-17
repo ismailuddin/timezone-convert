@@ -1,4 +1,5 @@
 # TimeZone
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e8882579-0aac-4b0a-b607-cc7e3e48f44f/deploy-status)](https://app.netlify.com/sites/timezone-convert/deploys)
 
 >   A modern progressive web app for converting between time zones, that works well on mobile and desktops
 
@@ -18,3 +19,4 @@ Resources used to develop site:
 $   npm install
 $   npm start
 ```
+
