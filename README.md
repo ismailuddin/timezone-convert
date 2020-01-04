@@ -19,7 +19,7 @@ Resources used to develop site:
 
 
 
-## Deployment
+## Deploy locally
 ```shell
 $   npm install
 $   npm start
