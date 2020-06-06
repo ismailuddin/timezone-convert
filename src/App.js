@@ -38,7 +38,7 @@ export default class App extends Component {
 						<h1>
 							TimeZone
 						</h1>
-						<img alt="logo" class="logo" src="./logo.png"/>
+						<img alt="logo" className="logo" src="./logo.png"/>
 					</div>
 				</div>
 				<section>
