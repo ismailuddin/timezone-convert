@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import moment from 'moment-timezone';
 import PropTypes from 'prop-types';
+import { ReactComponent as Clock } from '../clock.svg';
+
 
 export default class TimeZoneSlider extends Component {
     static propTypes = {
@@ -92,9 +94,14 @@ export default class TimeZoneSlider extends Component {
         }
         return (
             <div>
-                <button className="btn btn-red" onClick={this.resetTime}>
-                    Set to current time
-                </button>
+                <div className="text-center">
+                    <button className="btn btn-red" onClick={this.resetTime}>
+                        <Clock style={{
+                            marginRight: 5
+                        }} />
+                        Set time to now
+                    </button>
+                </div>
                 <div className="selected-time">
                     {this.props.selectedTime.format("hh:mm A")}
                 </div>

@@ -4,7 +4,7 @@ import Cities from './components/Cities';
 import TimeZoneSlider from './components/TimeZoneSlider';
 import AutocompleteTextbox from './components/AutocompleteTextbox';
 import moment from 'moment';
-
+import { motion } from 'framer-motion';
 
 export default class App extends Component {
 	state = {
@@ -35,23 +35,34 @@ export default class App extends Component {
 			<div>
 				<div className="navbar">
 					<div className="container">
-						<h1>
+						<motion.h1
+							initial={{ y: -100 }}
+							animate={{ y: 0 }}
+						>
 							TimeZone
-						</h1>
-						<img alt="logo" className="logo" src="./logo.png"/>
+						</motion.h1>
+						<motion.h3
+							initial={{ y: -100 }}
+							animate={{ y: 0 }}
+							transition={{ delay: 0.1 }}
+						>
+							Convert between time zones
+						</motion.h3>
+						{/* <img alt="logo" className="logo" src="./logo.png"/> */}
 					</div>
 				</div>
 				<section>
 					<div className="container">
-						<p className="body">
+						<motion.p className="body"
+							initial={{ y: 100 }}
+							animate={{ y: 0 }}
+							transition={{ delay: 0.2 }}
+						>
 							Easily convert between time zones using a modern and pleasant UI, that works well both on desktop and mobile!
-						</p>
-						<p className="body">
-							Developed as a progressive web app so you can add this to your home screen on your mobile device, and use it like a native app.
-						</p>
+						</motion.p>
 					</div>
 				</section>
-				<section className="light-bg">
+				<section>
 					<div className="container">
 						<h2>
 							Add cities
@@ -73,9 +84,9 @@ export default class App extends Component {
 				</section>
 				<section>
 					<div className="container">
-						<h2>
+						{/* <h2>
 							Adjust the time
-						</h2>
+						</h2> */}
 						
 						<TimeZoneSlider
 							selectedTime={this.state.selectedTime}

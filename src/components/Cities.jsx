@@ -39,11 +39,14 @@ export default class Cities extends Component {
                             <div className="close-button" onClick={() => this.props.removeCity(item)}>
                                 <CloseIcon width="15px" height="15px"/>
                             </div>
+                            <h5>
+                                {item.split("/")[0]}
+                            </h5>
                             <h4>
-                                {item}
+                                {item.split("/")[1].replace("_", " ")}
                             </h4>
                             <div className="city-date">
-                                {this.convertTimeZone(item).format("ddd Do MMM YYYY")}
+                                {this.convertTimeZone(item).format("ddd Do MMM")}
                             </div>
                             <div className="city-time">
                                 {this.convertTimeZone(item).format("hh:mm A")}

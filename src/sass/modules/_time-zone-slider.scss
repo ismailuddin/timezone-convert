@@ -1,3 +1,10 @@
+.selected-time {
+	font-family: "Teko";
+	text-align: center;
+	font-size: 1.6em;
+	color: white;
+	margin-top: 10px;
+}
 
 .time-slider-container {
     margin-left: auto;
@@ -8,7 +15,7 @@
 	height: 80px;
 	position: relative;
 	overflow: hidden;
-	background-color: #fff;
+	
 
 	.selected-time-indicator {
 		&::after {
@@ -20,7 +27,7 @@
 			height: 0;
 			border-left: 20px solid transparent;
 			border-right: 20px solid transparent;
-			border-top: 8px solid#ef4565;
+			border-top: 8px solid $cyan;
 		}
 	}
 
@@ -52,14 +59,15 @@
 				position: relative;
 
 				&.blue {
-					background-color: rgba($faint_blue, 0.25);
+					// background-color: rgba($faintBlue, 0.25);
+					background-color: darken($darkPurple, 2%);
 				}
 
 
 				& > .major-bar {
 					width: 2px;
 					height: 50%;
-					background-color: #90b4ce;
+					background-color: lighten($purple, 40%);
 					float: left;
 					left: 0;
 					content: '';
@@ -70,7 +78,7 @@
 					margin-left: 7px;
 					width: 1px;
 					height: 25%;
-					background-color: #90b4ce;
+					background-color: lighten($purple, 30%);
 					content: '';
 				}
 
@@ -83,7 +91,7 @@
 					font-family: 'Teko';
 					font-weight: 300;
 					font-size: 1.2em;
-					color: #094067;
+					color: white;
 					
 				}
 			}
@@ -92,7 +100,7 @@
 
 	.city-block {
 		display: inline-block;
-		border-radius: 10px;
+		border-radius: 20px;
 		padding: 15px;
 		color: white;
 		font-family: 'Fugaz One';
